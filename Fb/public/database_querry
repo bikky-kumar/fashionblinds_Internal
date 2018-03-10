@@ -1,0 +1,65 @@
+
+//create databse fashionblinds_internal
+_______________________________
+//add user bikky, password dublin320
+
+________________________________
+//create table staff 
+CREATE TABLE staff(
+staff_id int NOT NULL AUTO_INCREMENT,
+staff_fullname varchar(255) NOT NULL,
+staff_phone varchar(255),
+staff_email varchar(255),
+staff_password varchar(255),
+PRIMARY KEY (staff_id)
+)
+
+
+INSERT INTO staff(full_name, phone, contact_date, status, source, staff_id, comment) VALUES('Ryan Hughes', '085459544', 'carlow street, Dublin18', '2017-02-23', 1, 'facebook', '1', 'Need ASAP');
+_________________________________
+//DATE FORMAT IS YYYY-MM-DD
+
+//create table customers
+CREATE TABLE customers(
+customer_id int NOT NULL AUTO_INCREMENT, 
+full_name varchar(255) NOT NULL, 
+email varchar(30), 
+phone varchar(30), 
+address varchar(255), 
+contact_date DATE, 
+status TINYINT(1), 
+source varchar(85), 
+staff_id int, 
+comment varchar(255), 
+processed_date DATE, 
+PRIMARY KEY (customer_id));
+
+//add index to staff_id to make it relationable to staff table
+ALTER TABLE customers ADD INDEX fk_staff_id(staff_id);
+
+_____________________
+
+//inserting data into customers table
+INSERT INTO customers(full_name, email, phone, address, contact_date, status, source, staff_id, comment) VALUES('Nina dey', 'nina@gmail.com' , '085459544', 'RZx0- D2, Dublin', '2017-02-23', 1, 'facebook', '1', 'Need ASAP');
+INSERT INTO customers(full_name, email, phone, address, contact_date, status, source, staff_id, comment) VALUES('Tony mullins', 'tony@gmail.com' , '085459544', 'RZx0- D2, Dublin', '2018-02-23', 1, 'Instagram', '2', 'Need soon');
+INSERT INTO customers(full_name, email, phone, address, contact_date, status, source, staff_id, comment) VALUES('Giani Martins', 'giani@gmail.com' , '085459544', 'Claire street, Dublin', '2016-02-23', 0, 'call', '2', 'Need soon');
+
+
+ALTER TABLE customers ADD processed_date DATE;
+
+Another table called orders;
+
+order contains;
+order_id - primary 
+staff_id - foreign, 
+customer_id - foreign, 
+total purchased amount;
+
+Another table called order_details;
+
+order_detail_id primary;
+customer_id  - foreign;
+location - string,
+blind-type- string,
+blind-subtype - string,
+price_calculated - decimal,

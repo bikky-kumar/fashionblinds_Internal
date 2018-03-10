@@ -1,9 +1,6 @@
 <?php require_once("../../private/initialize.php");
-$page_title = "add customer" ;
+$page_title = "add staff" ;
 require_once(SHARED_PATH .'/header.php');
-
-$test = isset($_GET['test']) ? $_GET['test'] : '' ;
-
 /*
 if($test == '404'){
     error_404();
@@ -17,54 +14,48 @@ exit;
 }
 */
 
-
+if (is_post_request()){
+  $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
+  $email = isset($_POST['email']) ? $_POST['email'] : ''; 
+  $phone = isset($_POST['phone']) ? $_POST['phone'] : ''; 
+  $password = isset($_POST['password']) ? $_POST['password'] : ''; 
+  
+  
+  echo "Form parameters <br />";
+  
+  echo $fullname . "<br />" ;
+  echo $email . "<br />";
+  echo $phone  . "<br />";
+  echo $password . "<br />";
+ 
+  }
+  else{
+  
+    //redirect_to(url_for('/public/admin/index.php'));
+  }
 ?>
-
-<?php
-
-  $staffs = [
-    ['c_id' => '1', 'c_email' => 'xyz@gmail.com', 'c_phone' => '930333', 'c_name' => 'Marta Joyce', 'c_adress' => 'About Globe Bank'],
-    ['c_id' => '2', 'c_email' => 'xyz@gmail.com', 'c_phone' => '378383', 'c_name' => 'Bikky kumar', 'c_adress' => 'About Globe Bank'],
-    ['c_id' => '3', 'c_email' => 'xyz@gmail.com', 'c_phone' => '37838292', 'c_name' => 'Paul joyce', 'c_adress' => 'About Globe Bank'],
-    ['c_id' => '4', 'c_email' => 'xyz@gmail.com', 'c_phone' => '3738838', 'c_name' => 'Lynne Joyce', 'c_adress' => 'About Globe Bank'],
-  ];
-?>
-
-
 
 <div class = "container">
+<div class = "page-heading">
+	<h3>Staff Form</h3>
+</div>
 <div class ="bread-crumb">
 <a class="back_link" href="<?php echo url_for('public/admin/index.php'); ?>"> &laquo; Back to Admin</a> 
 </div>
-
-<div class = "page-heading">
-	<h3>Customer Form</h3>
-</div>
 <div class="form_container">
-  <form action="" method = "post">
+  <form action="<?php echo url_for('public/admin/add_staff.php'); ?>" method = "post">
     <label for="fname">Full Name</label>
-    <input type="text" id="fullname" name="fullname" placeholder="enter full name..">
+    <input type="text" id="fullname" name="fullname" value="" required>
 
     <label for="lname">email</label>
-    <input type="text" id="lname" name="email" placeholder="ex:xyz@abc.com">
+    <input type="text" id="lname" name="email"  value="ex:xyz@abc.com">
 
 
     <label for="lname">Phone</label>
-    <input type="text" id="phone" name="phone" placeholder="phone number">
+    <input type="text" id="phone" name="phone"  value="phone number">
 
-    <label for="address">Address</label>
-    <input type="text" id="address" name="address" placeholder="customer address">
-
-    <label for="assign">Assign</label>
-    <select id="assign" name="assign">
-    	<option>None</option>
-		<?php foreach($staffs as $staff){ ?>
-		<option><?php echo h($staff['c_name'])?></option>
-		<?php } ?>
-    </select>
-
-    <label for="comment">Comment</label>
-    <textarea id="comment" name="comment" placeholder="leave empty if no comment" style="height:50px"></textarea>
+    <label for="password">Assign Password</label>
+    <input type="password" id="password" name="password"  value="" required>
 
     <input type="submit" value="Submit">
   </form>

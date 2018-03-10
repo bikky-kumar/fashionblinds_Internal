@@ -7,4 +7,6 @@
 </head>
 
 <body>
-<div id = "site-header">Fashion Blinds Internal</div>
+<div id = "site-header">
+<div id = "logo">Internal</div>
+</div>

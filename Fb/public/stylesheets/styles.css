@@ -4,10 +4,9 @@ html {
   }
   
   body {
+    padding-top: 0px !important;
     font-weight: 100;
     font-family: sans-serif;
-    padding-top:20px;
-    height: 980px;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -17,7 +16,6 @@ html {
     color: #fff;
     width: 100%;
     background: linear-gradient(-90deg, #345, #24BBCD);
-    padding: 20px;
 }
 
   header {
@@ -66,13 +64,11 @@ html {
     font-weight: 100;
     font-family: sans-serif;
     width: 100%;
-    height: 20px;
-    margin: 0 0 10px 0;
-    padding: 10px 20px;
+    height: 50px;
+    margin: 55px 0 0 0;
     background: linear-gradient(-90deg, #345, #24BBCD);
     color: #fff;
     bottom: 0;
-    position: fixed;
   }
   
   /* Actions */
@@ -94,11 +90,21 @@ html {
   }
   
   table.list tr td {
-    border: 1px solid #999999;
+    text-align: left;
+    padding: 6px;
+    border: 1px solid #EEE;
+    font-family: monospace;
+  }
+
+  tr{
+    background: #fff;
   }
   
   table.list tr th {
-    border: 1px solid rgba(66, 65, 66, 0.527);
+    font-family: monospace;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
     background: rgba(65, 66, 64, 0.048);
     color:#333;
     text-align: left;
@@ -144,10 +150,12 @@ html {
   }
 
   .container{
-  width:100%;
+    width: 80%;
+    margin: 0 auto;
 }
 
  .container h3{
+  margin-top: 0 !important;
   padding: 20px;
   color: #666;
     font-family: sans-serif;
@@ -156,6 +164,31 @@ html {
 
   .page-heading{
   background: linear-gradient(-90deg, #666 0, #eee 100%);
+}
+
+#logo{
+    padding: 20px;
+    font-family: sans-serif;
+    font-size: 32px;
+}
+
+#admin_menu{
+ 
+}
+.nav_menu{
+  width: 30%;
+  float: left;
+}
+
+tbody{
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+h2{
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: 18px;
 }
 
 

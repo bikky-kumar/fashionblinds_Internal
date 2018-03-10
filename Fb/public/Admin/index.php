@@ -8,14 +8,19 @@
 	<div class = "page-heading">
 		<h3>Admin dashboard</h3>
 	</div>
-
 	<div id= Admin_menu>
-		<nav>
-			<ul>
-				<li><a href = "<?php echo url_for('/public/admin/add_customer.php'); ?>">Create new Customer</a> </li>
-				<li><a href = "<?php echo url_for('/public/admin/add_staff.php'); ?>">Add Staff Memeber</a> </li>
-			</ul>
-		</nav>
+		<div class= "nav_menu">
+			<nav>
+				<ul>
+					<li><a href = "<?php echo url_for('/public/admin/add_customer.php'); ?>">Create new Customer</a> </li>
+					<li><a href = "<?php echo url_for('/public/admin/add_staff.php'); ?>">Add Staff Memeber</a> </li>
+				</ul>
+			</nav>
+		</div>
+		<div class = "admin_features_view">
+			<?php require(PUBLIC_PATH. '/admin/search_widget.php') ?>
+			<?php require(PUBLIC_PATH. '/admin/admin_widget.php') ?>
+		</div>
 	</div>
 	<div>
 		<h2> List of Customers </h2>
@@ -26,6 +31,10 @@
 		<?php require(PUBLIC_PATH. '/staff/stafflist.php') ?>
 	</div>
 </div>
+
+<?php 
+mysqli_free_result($customer_set);
+?>
 
 <?php require_once(SHARED_PATH ."/footer.php");?>
 

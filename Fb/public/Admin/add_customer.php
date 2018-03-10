@@ -1,55 +1,86 @@
 <?php require_once("../../private/initialize.php");
+
+$staff_set = find_all_staff();
 $page_title = "add customer" ;
 require_once(SHARED_PATH .'/header.php');
 
-$test = isset($_GET['test']) ? $_GET['test'] : '' ;
-
-/*
-if($test == '404'){
-    error_404();
-}
-elseif($test == '500'){
-    error_500();
-}
-elseif($test = 'redirect'){
-redirect_to("index.php");
-exit;
-}
-*/
 
 
+if (is_post_request()){
+  $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
+  $email = isset($_POST['email']) ? $_POST['email'] : ''; 
+  $phone = isset($_POST['phone']) ? $_POST['phone'] : ''; 
+  $address = isset($_POST['address']) ? $_POST['address'] : ''; 
+  $date = isset($_POST['date']) ? $_POST['date'] : ''; 
+  $status = isset($_POST['status']) ? $_POST['status'] : ''; 
+  $source = isset($_POST['source']) ? $_POST['source'] : ''; 
+  $assign = isset($_POST['assign']) ? $_POST['assign'] : ''; 
+  $comment = isset($_POST['comment']) ? $_POST['comment'] : ''; 
+
+
+//getting staff_id from stafftable
+  $staff_id = return_staff_id($fullname) ;
+  
+  $sql = "INSERT INTO customers ";
+  $sql .= "(full_name, email, phone, address, contact_date, status, source, staff_id, comment) "; 
+  $sql .= "VALUES (";
+  $sql .= "'" . $fullname. "',";
+  $sql .= "'" . $email. "',";
+  $sql .= "'" . $phone. "',";
+  $sql .= "'" . $address. "',";
+  $sql .= "'" . $date. "',";
+  $sql .= "'" . $status. "',";
+  $sql .= "'" . $source. "',";
+  $sql .= "'" . $staff_id. "',";
+  $sql .= "'" . $comment. "'";
+  $sql .= ")";
+
+  $result = mysqli_query($db, $sql);
+
+  if($result){
+    redirect_to(url_for('/public/success.php'));
+  }else{
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+  }
+
+  
+  echo "Form parameters <br />";
+  
+  echo $fullname . "<br />" ;
+  echo $email . "<br />";
+  echo $phone  . "<br />";
+  echo $address . "<br />";
+  echo $date . "<br />";
+  echo $status . "<br />"; 
+  echo $source . "<br />";
+  echo $assign . "<br />"; 
+  echo $comment . "<br />";
+  echo $staff_id  . "<br />";
+  }
+  else{
+   // redirect_to(url_for('/public/admin/index.php'));
+  }
 ?>
-
-<?php
-
-  $staffs = [
-    ['c_id' => '1', 'c_email' => 'xyz@gmail.com', 'c_phone' => '930333', 'c_name' => 'Marta Joyce', 'c_adress' => 'About Globe Bank'],
-    ['c_id' => '2', 'c_email' => 'xyz@gmail.com', 'c_phone' => '378383', 'c_name' => 'Bikky kumar', 'c_adress' => 'About Globe Bank'],
-    ['c_id' => '3', 'c_email' => 'xyz@gmail.com', 'c_phone' => '37838292', 'c_name' => 'Paul joyce', 'c_adress' => 'About Globe Bank'],
-    ['c_id' => '4', 'c_email' => 'xyz@gmail.com', 'c_phone' => '3738838', 'c_name' => 'Lynne Joyce', 'c_adress' => 'About Globe Bank'],
-  ];
-?>
-
-
 
 <div class = "container">
-<div class ="bread-crumb">
-<a class="back_link" href="<?php echo url_for('public/admin/index.php'); ?>"> &laquo; Back to Admin</a> 
-</div>
-
 <div class = "page-heading">
 	<h3>Customer Form</h3>
 </div>
+<div class ="bread-crumb">
+<a class="back_link" href="<?php echo url_for('public/admin/index.php'); ?>"> &laquo; Back to Admin</a> 
+</div>
 <div class="form_container">
-  <form action="<?php echo url_for('public/admin/create_customer.php')?>" method = "post">
-    <label for="fname">Full Name</label>
+  <form action="<?php echo url_for('public/admin/add_customer.php')?>" method = "post">
+    <label for="fullname">Full Name</label>
     <input type="text" id="fullname" name="fullname" placeholder="enter full name..">
 
-    <label for="lname">email</label>
-    <input type="text" id="lname" name="email" placeholder="ex:xyz@abc.com">
+    <label for="email">email</label>
+    <input type="text" id="email" name="email" placeholder="ex:xyz@abc.com">
 
 
-    <label for="lname">Phone</label>
+    <label for="phone">Phone</label>
     <input type="text" id="phone" name="phone" placeholder="phone number">
 
     <label for="address">Address</label>
@@ -58,12 +89,30 @@ exit;
     <label for="date">Date</label><br />   
     <input type="Date" id="date" name="date"><br /><br />
 
+    <label for="status">Status</label>
+    <select id="status" name="status">
+    	<option>None</option>
+		<option value = "1">In Process</option>
+    <option value = "0">completed</option>
+    </select>
+
+
+    <label for="source">Source</label>
+    <select id="source" name="source">
+    	<option>None</option>
+		<option>Facebook</option>
+    <option>Linkedin</option>
+    <option>Google</option>
+    <option>Instagram</option>
+    <option>Main Website</option>
+    <option>In Store Call</option>
+    </select>
 
     <label for="assign">Assign</label>
     <select id="assign" name="assign">
     	<option>None</option>
-		<?php foreach($staffs as $staff){ ?>
-		<option><?php echo h($staff['c_name'])?></option>
+		<?php while($staff = mysqli_fetch_assoc($staff_set)){ ?>
+		<option><?php echo h($staff['staff_fullname'])?></option>
 		<?php } ?>
     </select>
 
