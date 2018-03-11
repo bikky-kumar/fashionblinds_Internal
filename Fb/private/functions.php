@@ -36,4 +36,35 @@ function is_get_request(){
     return $_SERVER['REQUEST_METHOD'] == 'GET';
 }
 
+function current_date(){
+    echo  date("Y-m-d") . "<br>";
+}
+
+function welcome(){
+    echo "Welcome: " . "user_name";
+}
+
+
+function display_errors($errors=array()) {
+  $output = '';
+  if(!empty($errors)) {
+    $output .= "<div class=\"errors\">";
+    $output .= "Please fix the following errors:";
+    $output .= "<ul>";
+    foreach($errors as $error) {
+      $output .= "<li>" . h($error) . "</li>";
+    }
+    $output .= "</ul>";
+    $output .= "</div>";
+  }
+  return $output;
+}
+
+//preventing SQL injection
+function db_escape($connection, $string){
+    return mysqli_real_escape_string($connection, $string);
+}
+
+
+
 ?>

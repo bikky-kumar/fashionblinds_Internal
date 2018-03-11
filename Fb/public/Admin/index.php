@@ -4,13 +4,15 @@
 
 
 
+
+
 <div class="container">
 	<div class = "page-heading">
-		<h3>Admin dashboard</h3>
+		<h3>Admin dashboard <span id = "current_date"><?php welcome(); ?></span></h3>
 	</div>
 	<div id= Admin_menu>
-		<div class= "nav_menu">
-			<nav>
+		<div class= "div_menu">
+			<nav class = "nav_menu">
 				<ul>
 					<li><a href = "<?php echo url_for('/public/admin/add_customer.php'); ?>">Create new Customer</a> </li>
 					<li><a href = "<?php echo url_for('/public/admin/add_staff.php'); ?>">Add Staff Memeber</a> </li>

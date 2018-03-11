@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -8,5 +7,5 @@
 
 <body>
 <div id = "site-header">
-<div id = "logo">Internal</div>
+<div id = "logo">Internal<span id = "current_date"><?php current_date(); ?></span></div>
 </div>

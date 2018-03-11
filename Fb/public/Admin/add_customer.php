@@ -1,10 +1,8 @@
 <?php require_once("../../private/initialize.php");
-
-$staff_set = find_all_staff();
 $page_title = "add customer" ;
 require_once(SHARED_PATH .'/header.php');
 
-
+$staff_set = find_all_staff();
 
 if (is_post_request()){
   $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
@@ -19,49 +17,12 @@ if (is_post_request()){
 
 
 //getting staff_id from stafftable
-  $staff_id = return_staff_id($fullname) ;
+  $staff_id = return_staff_id($assign) ;
+  insert_customers($fullname, $email, $phone, $address, $date, $status, $source, $staff_id, $comment);
   
-  $sql = "INSERT INTO customers ";
-  $sql .= "(full_name, email, phone, address, contact_date, status, source, staff_id, comment) "; 
-  $sql .= "VALUES (";
-  $sql .= "'" . $fullname. "',";
-  $sql .= "'" . $email. "',";
-  $sql .= "'" . $phone. "',";
-  $sql .= "'" . $address. "',";
-  $sql .= "'" . $date. "',";
-  $sql .= "'" . $status. "',";
-  $sql .= "'" . $source. "',";
-  $sql .= "'" . $staff_id. "',";
-  $sql .= "'" . $comment. "'";
-  $sql .= ")";
-
-  $result = mysqli_query($db, $sql);
-
-  if($result){
-    redirect_to(url_for('/public/success.php'));
-  }else{
-    echo mysqli_error($db);
-    db_disconnect($db);
-    exit;
-  }
-
   
-  echo "Form parameters <br />";
-  
-  echo $fullname . "<br />" ;
-  echo $email . "<br />";
-  echo $phone  . "<br />";
-  echo $address . "<br />";
-  echo $date . "<br />";
-  echo $status . "<br />"; 
-  echo $source . "<br />";
-  echo $assign . "<br />"; 
-  echo $comment . "<br />";
-  echo $staff_id  . "<br />";
-  }
-  else{
-   // redirect_to(url_for('/public/admin/index.php'));
-  }
+}
+
 ?>
 
 <div class = "container">

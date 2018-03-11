@@ -1,18 +1,6 @@
 <?php require_once("../../private/initialize.php");
 $page_title = "add staff" ;
 require_once(SHARED_PATH .'/header.php');
-/*
-if($test == '404'){
-    error_404();
-}
-elseif($test == '500'){
-    error_500();
-}
-elseif($test = 'redirect'){
-redirect_to("index.php");
-exit;
-}
-*/
 
 if (is_post_request()){
   $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
@@ -20,19 +8,9 @@ if (is_post_request()){
   $phone = isset($_POST['phone']) ? $_POST['phone'] : ''; 
   $password = isset($_POST['password']) ? $_POST['password'] : ''; 
   
-  
-  echo "Form parameters <br />";
-  
-  echo $fullname . "<br />" ;
-  echo $email . "<br />";
-  echo $phone  . "<br />";
-  echo $password . "<br />";
- 
-  }
-  else{
-  
-    //redirect_to(url_for('/public/admin/index.php'));
-  }
+
+  insert_staff($fullname, $email, $phone, $password);
+}
 ?>
 
 <div class = "container">

@@ -17,6 +17,7 @@ define("WWW_ROOT", $doc_root);
     require_once('query_function.php');
 
     $db = db_connect();
+    $errors = [];
 
  
 ?>

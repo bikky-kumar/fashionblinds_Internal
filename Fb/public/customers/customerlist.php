@@ -41,13 +41,13 @@ $customer_set = find_all_customers();
 <td><?php echo h($customer['address'])?></td>
 <td><?php echo h($customer['contact_date'])?></td>
 <td><?php echo $status ?></td>
-<td><?php echo "From orders table" ?></td>
+<td><?php echo h($customer['processed_date']) ?></td>
 <td><?php echo h($customer['source'])?></td>
 <td><?php echo h(find_assigned($customer['staff_id'])) ; ?></td>
 <td><?php echo h($customer['comment'])?></td>
-<td><a class="action" href = "<?php echo url_for('/public/customers/show.php?id='.$customer['customer_id']) ; ?>">VIEW </a></td>
-<td><a class="action" href = "<?php echo url_for('/public/customers/edit_customer.php?id='.$customer['customer_id']) ; ?>">EDIT</a></td>
-<td><a class="action" href = "">DELETE </a></td>
+<td id = "action"><a class="action" href = "<?php echo url_for('/public/customers/show.php?id='.$customer['customer_id']) ; ?>"><img src="<?php echo url_for('public/images/view.png'); ?>" alt="View button"></a></td>
+<td id = "action"><a class="action" href = "<?php echo url_for('/public/customers/edit_customer.php?id='.$customer['customer_id']) ; ?>"><img src="<?php echo url_for('public/images/edit.png'); ?>" alt="Edit button"></a></td>
+<td id = "action"><a class="action" href = "<?php echo url_for('/public/customers/delete_customer.php?id='.$customer['customer_id']) ; ?>"><img src="<?php echo url_for('public/images/deleteButton.png'); ?>" alt="Delete button"></a></td>
 </tr>
 <?php } ?>
 </table>

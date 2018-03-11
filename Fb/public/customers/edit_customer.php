@@ -32,25 +32,25 @@ else{
 
 }
 
-//this will update the database
+//update button makes a post request to the database
 if (is_post_request()){
-  $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
-  $email = isset($_POST['email']) ? $_POST['email'] : ''; 
-  $phone = isset($_POST['phone']) ? $_POST['phone'] : ''; 
-  $address = isset($_POST['address']) ? $_POST['address'] : ''; 
-  $date = isset($_POST['date']) ? $_POST['date'] : ''; 
-  $assign = isset($_POST['assign']) ? $_POST['assign'] : ''; 
-  $comment = isset($_POST['comment']) ? $_POST['comment'] : ''; 
   
-  echo "Form parameters <br />";
-  
-  echo $fullname . "<br />" ;
-  echo $email . "<br />";
-  echo $phone  . "<br />";
-  echo $address . "<br />";
-  echo $date . "<br />";
-  echo $assign . "<br />"; 
-  echo $comment . "<br />";
+  $customer= [];
+
+  $customer['id'] = $id;
+  $customer['fullname'] = isset($_POST['full_name']) ? $_POST['full_name'] : ''; 
+  $customer['email'] = isset($_POST['email']) ? $_POST['email'] : ''; 
+  $customer['phone'] = isset($_POST['phone']) ? $_POST['phone'] : ''; 
+  $customer['address'] = isset($_POST['address']) ? $_POST['address'] : ''; 
+  $customer['date'] = isset($_POST['start_date']) ? $_POST['start_date'] : ''; 
+  $customer['assign'] = isset($_POST['assign']) ? $_POST['assign'] : ''; 
+  $customer['status'] = isset($_POST['status']) ? $_POST['status'] : ''; 
+  $customer['source'] = isset($_POST['source']) ? $_POST['source'] : ''; 
+  $customer['comment'] = isset($_POST['comment']) ? $_POST['comment'] : ''; 
+  $customer['processed_date'] = isset($_POST['processed_date']) ? $_POST['processed_date'] : ''; 
+  $customer['staff_id'] = return_staff_id($customer['assign']);
+
+  update_customer($customer);
   }
   else{
   
@@ -60,19 +60,7 @@ if (is_post_request()){
 
 $page_title = "Edit customer" ;
 require_once(SHARED_PATH .'/header.php');
-$test = isset($_GET['test']) ? $_GET['test'] : '' ;
-/*
-if($test == '404'){
-    error_404();
-}
-elseif($test == '500'){
-    error_500();
-}
-elseif($test = 'redirect'){
-redirect_to("index.php");
-exit;
-}
-*/
+
 ?>
 
 <div class = "container">
@@ -106,7 +94,7 @@ exit;
     <input type="Date" id="date" name="start_date" value= <?php echo $contact_date ?>><br /><br />
 
     <label for="date">Processed Date</label><br />   
-    <input type="Date" id="date" name="processed_date" value= <?php echo $processed_date ?>><br /><br />
+    <input type="Date" id="processed_date" name="processed_date" value= <?php echo $processed_date ?>><br /><br />
 
     <label for="status">Status</label>
     <select id="status" name="status">

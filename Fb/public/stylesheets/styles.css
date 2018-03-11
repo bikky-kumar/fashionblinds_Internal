@@ -90,10 +90,11 @@ html {
   }
   
   table.list tr td {
+    font-size: 12px;
     text-align: left;
     padding: 6px;
     border: 1px solid #EEE;
-    font-family: monospace;
+    font-family: sans-serif;
   }
 
   tr{
@@ -101,8 +102,9 @@ html {
   }
   
   table.list tr th {
-    font-family: monospace;
-    padding: 10px;
+    font-size: 10px;
+    font-family: sans-serif;
+    padding: 5px;
     border-radius: 3px;
     border: 1px solid #ccc;
     background: rgba(65, 66, 64, 0.048);
@@ -152,6 +154,7 @@ html {
   .container{
     width: 80%;
     margin: 0 auto;
+    min-height: 800px;
 }
 
  .container h3{
@@ -175,10 +178,25 @@ html {
 #admin_menu{
  
 }
-.nav_menu{
+
+.div_menu{
   width: 30%;
   float: left;
 }
+.nav_menu{
+  margin: 0 auto;
+  width: 90%;
+}
+
+.nav_menu ul{
+  list-style: none;
+}
+
+.nav_menu ul li a{
+ text-decoration: none;
+}
+    
+
 
 tbody{
   font-family: sans-serif;
@@ -189,6 +207,24 @@ h2{
   font-family: sans-serif;
   font-weight: 200;
   font-size: 18px;
+}
+
+.action img:hover{
+  width:29px;
+}
+
+div #new_calls{
+    font-family: monospace;
+    font-size: 16px;
+    color: green;
+}
+
+#current_date{
+    float: right;
+    color: #eee;
+    font-family: monospace;
+    font-weight: 100;
+    font-size: 14px;
 }
 
 

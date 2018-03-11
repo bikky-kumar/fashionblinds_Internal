@@ -17,32 +17,33 @@ else{
   $password = $staff['staff_password'] ;
 }
 
-
-
 //retrive the information from database about the customer where id  = $id  
 }
 //assign the id
 $page_title = "Edit Staff" ;
 require_once(SHARED_PATH .'/header.php');
 
-$test = isset($_GET['test']) ? $_GET['test'] : '' ;
-
 
 //update querry here in if statement
 
 if (is_post_request()){
-  $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
-  $email = isset($_POST['email']) ? $_POST['email'] : ''; 
-  $phone = isset($_POST['phone']) ? $_POST['phone'] : ''; 
-  $password = isset($_POST['password']) ? $_POST['password'] : ''; 
+
+  $staff = [];
+  $staff['id'] = $id;
+  $staff['fullname'] = isset($_POST['fullname']) ? $_POST['fullname'] : ''; 
+  $staff['email'] = isset($_POST['email']) ? $_POST['email'] : ''; 
+  $staff['phone'] = isset($_POST['phone']) ? $_POST['phone'] : ''; 
+  $staff['password'] = isset($_POST['password']) ? $_POST['password'] : ''; 
  
-  
-  echo "Form parameters <br />";
-  
-  echo $fullname . "<br />" ;
-  echo $email . "<br />";
-  echo $phone  . "<br />";
-  echo $password . "<br />"; 
+  $result = update_staff($staff);
+  if($result === true){
+    echo success;
+  }
+  else{
+    $errors = $result;
+    //var_dump($errors);
+  }
+ 
 
   }
   else{
@@ -59,6 +60,9 @@ if (is_post_request()){
 <div class = "page-heading">
 	<h3>Edit Staff </h3>
 </div>
+
+<?php echo display_errors($errors); ?>
+
 <div class="form_container">
   <form action="<?php echo url_for('public/staff/edit_staff.php?id='. h($id)); ?>" method = "post">
 
