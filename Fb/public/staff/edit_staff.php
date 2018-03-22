@@ -1,7 +1,7 @@
-<?php require_once("../../private/initialize.php");
+<?php require_once("../../private/initialize.php"); ?>
+<?php require_admin_login(); ?>
 
-
-
+<?php
 
 //check if id is present to edit the staff with id, if not present redirect to the admin dashboard
 if(!isset($_GET['id'])){
@@ -54,7 +54,7 @@ if (is_post_request()){
 
 <div class = "container">
 <div class ="bread-crumb">
-<a class="back_link" href="<?php echo url_for('public/admin/index.php?id='. h($id)); ?>"> &laquo; Back to Admin</a> 
+<a class="back_link" href="<?php echo return_dashboard(); ?>"> &laquo; Back to Admin</a> 
 </div>
 
 <div class = "page-heading">

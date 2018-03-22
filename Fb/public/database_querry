@@ -15,7 +15,19 @@ PRIMARY KEY (staff_id)
 )
 
 
-INSERT INTO staff(full_name, phone, contact_date, status, source, staff_id, comment) VALUES('Ryan Hughes', '085459544', 'carlow street, Dublin18', '2017-02-23', 1, 'facebook', '1', 'Need ASAP');
+//create table admin 
+CREATE TABLE admins(
+admin_id int NOT NULL AUTO_INCREMENT,
+full_name varchar(255) NOT NULL,
+admin_email varchar(255),
+admin_password varchar(255),
+PRIMARY KEY (admin_id)
+)
+
+INSERT INTO admins(full_name, admin_email, admin_password) VALUES('Paul Joyce', 'pauljoyce@fashionblinds.ie', 'Dublin320');
+
+
+INSERT INTO customers(full_name, phone, contact_date, status, source, staff_id, comment) VALUES('Ryan Hughes', '085459544', 'carlow street, Dublin18', '2017-02-23', 1, 'facebook', '1', 'Need ASAP');
 _________________________________
 //DATE FORMAT IS YYYY-MM-DD
 
@@ -47,6 +59,51 @@ INSERT INTO customers(full_name, email, phone, address, contact_date, status, so
 
 ALTER TABLE customers ADD processed_date DATE;
 
+_____________________
+
+//create table product_type
+
+CREATE TABLE product_type(
+product_id int NOT NULL AUTO_INCREMENT, 
+product_name varchar(255) NOT NULL,
+PRIMARY KEY (product_id));
+
+INSERT INTO product_type(product_name) VALUES('Roller Blinds'); 
+INSERT INTO product_type(product_name) VALUES('Wooden Venetian'); 
+INSERT INTO product_type(product_name) VALUES('Blackout Blinds'); 
+INSERT INTO product_type(product_name) VALUES('Vertical Blinds');
+INSERT INTO product_type(product_name) VALUES('Roman Blinds');
+INSERT INTO product_type(product_name) VALUES('Venetian Blinds'); 
+INSERT INTO product_type(product_name) VALUES('Roof Blinds'); 
+
+___________________________________
+
+
+CREATE TABLE product_subtype(
+product_subtype_id int NOT NULL AUTO_INCREMENT,
+product_id int,  
+product_subtype varchar(255) NOT NULL,
+PRIMARY KEY (product_subtype_id));
+
+//add index to staff_id to make it relationable to staff table
+ALTER TABLE product_subtype ADD INDEX fk_product_id(product_id);
+
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('2', 'Wood Impressions');
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('2', 'Essential');
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('1', 'Splash');
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('1', 'Lola');
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('3', 'Vitra');
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('3', 'Allegra');
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('4', 'Splash');
+INSERT INTO product_subtype(product_id, product_subtype) VALUES('4', 'Aria');
+
+
+
+______________________________________________
+
+
+
+
 Another table called orders;
 
 order contains;
@@ -63,3 +120,13 @@ location - string,
 blind-type- string,
 blind-subtype - string,
 price_calculated - decimal,
+
+
+create product product_subtype
+
+1. primary index 
+2. foreign key from from product_type
+3. product_subtype_name
+
+
+

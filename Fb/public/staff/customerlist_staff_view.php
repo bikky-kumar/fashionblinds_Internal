@@ -1,9 +1,8 @@
 <?php require_once("../../private/initialize.php"); ?>
-<?php require_admin_login(); ?>
-<?php
-//$db is connection and $sql is query
-$customer_set = find_all_customers();
-?>
+<?php require_staff_login(); ?>
+
+
+
 
 <table class = "list">
 <tr>
@@ -26,7 +25,7 @@ $customer_set = find_all_customers();
 <?php while($customer = mysqli_fetch_assoc($customer_set)){ ?>
 
 <?php 
-$status = find_status($customer['status']);
+$status = find_status($customer['status']);   
 ?>
 
 <tr>
@@ -43,7 +42,7 @@ $status = find_status($customer['status']);
 <td><?php echo h($customer['comment'])?></td>
 <td id = "action"><a class="action" href = "<?php echo url_for('/public/customers/show.php?id='.$customer['customer_id']) ; ?>"><img src="<?php echo url_for('public/images/view.png'); ?>" alt="View button"></a></td>
 <td id = "action"><a class="action" href = "<?php echo url_for('/public/customers/edit_customer.php?id='.$customer['customer_id']) ; ?>"><img src="<?php echo url_for('public/images/edit.png'); ?>" alt="Edit button"></a></td>
-<td id = "action"><a class="action" href = "<?php echo url_for('/public/customers/delete_customer.php?id='.$customer['customer_id']) ; ?>"><img src="<?php echo url_for('public/images/deleteButton.png'); ?>" alt="Delete button"></a></td>
+<td id = "action"><a class="action" href = "<?php echo url_for('/public/staff/process_customer.php?id='.$customer['customer_id']) ; ?>"><img src="<?php echo "Process Order"; ?>" alt="Process Order"></a></td>
 </tr>
 <?php } ?>
 </table>

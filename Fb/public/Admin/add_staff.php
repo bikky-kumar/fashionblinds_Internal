@@ -1,4 +1,8 @@
-<?php require_once("../../private/initialize.php");
+<?php require_once("../../private/initialize.php"); ?>
+
+<?php require_admin_login(); ?>
+
+<?php
 $page_title = "add staff" ;
 require_once(SHARED_PATH .'/header.php');
 
@@ -18,7 +22,7 @@ if (is_post_request()){
 	<h3>Staff Form</h3>
 </div>
 <div class ="bread-crumb">
-<a class="back_link" href="<?php echo url_for('public/admin/index.php'); ?>"> &laquo; Back to Admin</a> 
+<a class="back_link" href="<?php echo return_dashboard();; ?>"> &laquo; Back to Admin</a> 
 </div>
 <div class="form_container">
   <form action="<?php echo url_for('public/admin/add_staff.php'); ?>" method = "post">

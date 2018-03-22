@@ -13,9 +13,10 @@ html {
   }
   
 #site-header{
-    color: #fff;
-    width: 100%;
-    background: linear-gradient(-90deg, #345, #24BBCD);
+  height: 180px;
+  color: #fff;
+  width: 100%;
+  background: linear-gradient(-90deg, #345, #24BBCD);
 }
 
   header {
@@ -170,9 +171,10 @@ html {
 }
 
 #logo{
-    padding: 20px;
-    font-family: sans-serif;
-    font-size: 32px;
+  float: left;
+  font-family: sans-serif;
+  font-size: 32px;
+  width: 5%;
 }
 
 #admin_menu{
@@ -180,7 +182,7 @@ html {
 }
 
 .div_menu{
-  width: 30%;
+  width: 21%;
   float: left;
 }
 .nav_menu{
@@ -220,12 +222,111 @@ div #new_calls{
 }
 
 #current_date{
-    float: right;
-    color: #eee;
-    font-family: monospace;
-    font-weight: 100;
-    font-size: 14px;
+  padding: 20px;
+  float: right;  
+}
+
+#current_user{
+  padding: 20px;
+  float: right;
+}
+
+#admin_menu{
+  background: #eee;
+}
+
+.admin_features_view{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 300px;
+    background: #eee;
+}
+
+.search{
+  padding: 10px; 
+}
+
+.quick_data_view{
+  padding: 10px;
+  float: right;
 }
 
 
+#widget_name{
+  font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.widget_table, tbody, tr, td{
+  padding: 10px;
+}
+
+.form_process_order input[type=text], input[type=Date], select{
+  width: 200px !important;
   
+}
+
+.list td input[type=number]{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.list td input[type=text], select{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+#order_table{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%; 
+}
+
+#order_table td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#order_table tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#logout{
+    background: lightgrey;
+    float: right;
+    padding: 20px;
+}
+
+#right-header{
+  width: 87%;
+  background: lightslategrey;
+  float: right;
+}
+
+#measurement select{
+  float: left;
+  width: 35% !important;
+}
+
+#measurement input[type=number]{
+  float: right;
+  width: 63% !important;
+}
+
+#price_table_uploads{
+width:80%;
+margin: 0 auto;
+}

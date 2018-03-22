@@ -22,7 +22,7 @@ function insert_customers($fullname, $email, $phone, $address, $date, $status, $
 
   //if true
   if($result){
-    redirect_to(url_for('/public/admin/index.php'));
+    redirect_to_dashboard();
   }else{
     error_msg();
   }
@@ -46,7 +46,7 @@ function insert_staff($fullname, $email, $phone, $password){
   //for INSERT Statement - this will return true or false if query successful
   $result = mysqli_query($db, $sql);
   if($result){
-    redirect_to(url_for('/public/admin/index.php'));
+    redirect_to_dashboard();
   }else{
     error_msg();
   }  
@@ -96,8 +96,8 @@ function update_customer($customer){
   //for INSERT Statement - this will return true or false if query successful
   $result = mysqli_query($db, $sql);
   if($result){
-    redirect_to(url_for('/public/admin/index.php'));
-  }else{
+    redirect_to_dashboard();
+    }else{
     error_msg();
   } 
 }
@@ -197,12 +197,6 @@ function count_customer(){
     return $value;
 }
 
-function error_msg(){
-    global $db;
-    echo mysqli_error($db);
-    db_disconnect($db);
-    exit;
-}
 
 function validate_staff($staff){
     $errors = [];
@@ -224,8 +218,104 @@ function validate_staff($staff){
 }
 
 
+function verify_admin($username, $password){
+    global $db;
+    $sql = "SELECT * FROM admins ";
+    $sql .= "WHERE admin_email = '". db_escape($db, $username). "'";
+    $sql .= "AND admin_password = '". db_escape($db, $password). "'";
+    $admin_result = mysqli_query($db, $sql);
+    confirm_result_set($admin_result);
+    $value = mysqli_fetch_assoc($admin_result);
+    return $value; 
+}
+
+function verify_staff($username, $password){
+    global $db;
+    $sql = "SELECT * FROM staff "; 
+    $sql .= "WHERE staff_email = '". db_escape($db, $username). "'";
+    $sql .= "AND staff_password = '". db_escape($db, $password). "'";
+    $staff_result = mysqli_query($db, $sql);
+    confirm_result_set($staff_result);
+    $value = mysqli_fetch_assoc($staff_result);
+    return $value;
+}
 
 
+function find_customers($staff_id){
+    //make sure when concatenation $sql .= / there is a space at the end of select statement
+    global $db;
+    $sql = "SELECT * FROM customers ";
+    $sql .= "WHERE staff_id = '". db_escape($db, $staff_id). "'";
+    $sql .= "ORDER BY contact_date DESC limit 20";
+    $customer_result = mysqli_query($db, $sql);
+    confirm_result_set($customer_result);
+    return $customer_result;
+}
+
+function find_my_account($staff_id){
+    //make sure when concatenation $sql .= / there is a space at the end of select statement
+    global $db;
+    $sql = "SELECT * FROM staff ";
+    $sql .= "WHERE staff_id = '". db_escape($db, $staff_id). "'";
+    $sql .= "limit 1";
+    $staff_result = mysqli_query($db, $sql);
+    confirm_result_set($staff_result);
+    return $staff_result;
+}
+
+
+
+
+function error_msg(){
+    global $db;
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+}
+
+
+function change_interval($query, $staff_id){
+    global $db;
+
+    $sql = "SELECT * FROM customers ";
+    $sql .= "WHERE staff_id = '". db_escape($db, $staff_id). "'";
+    $sql .= " AND contact_date >= DATE(NOW()) - INTERVAL $query WEEK";
+    $customer_result = mysqli_query($db, $sql);
+    confirm_result_set($customer_result);
+    return $customer_result;
+    
+}
+
+function change_by_Status($query, $staff_id){
+    global $db;
+    $status = $query-20;
+    $sql = "SELECT * FROM customers ";
+    $sql .= "WHERE staff_id = '". db_escape($db, $staff_id). "'";
+    $sql .= "AND status = '". db_escape($db, $status). "'";
+    $customer_result = mysqli_query($db, $sql);
+    confirm_result_set($customer_result);
+    return $customer_result;
+    
+}
+
+
+function product_list(){
+    global $db;
+    $sql = "SELECT * FROM product_type";
+    $product_result = mysqli_query($db, $sql);
+    confirm_result_set($product_result);
+    return $product_result;
+}
+
+
+function product_type_list(){
+    global $db;
+    $sql = "SELECT * FROM product_subtype";
+   // $sql .= "WHERE product_id = '". db_escape($db, $product_id). "'";
+    $product_result = mysqli_query($db, $sql);
+    confirm_result_set($product_result);
+    return $product_result;
+}
 
 
 

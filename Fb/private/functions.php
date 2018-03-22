@@ -41,7 +41,12 @@ function current_date(){
 }
 
 function welcome(){
-    echo "Welcome: " . "user_name";
+    if(isset($_SESSION['username'])){
+        echo "Welcome: ". $_SESSION['username'];
+    }
+    else{
+     // redirect_to('../login.php');
+    }
 }
 
 
@@ -63,6 +68,14 @@ function display_errors($errors=array()) {
 //preventing SQL injection
 function db_escape($connection, $string){
     return mysqli_real_escape_string($connection, $string);
+}
+
+
+function find_status($value){
+    if ($value == 1){$status = 'Quoted';}
+    elseif($value == 0){$status = 'Ordered';}
+    elseif($value == 2){$status = 'in Process';}
+    return  $status; 
 }
 
 

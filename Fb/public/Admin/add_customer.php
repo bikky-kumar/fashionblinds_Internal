@@ -1,4 +1,7 @@
-<?php require_once("../../private/initialize.php");
+<?php require_once("../../private/initialize.php"); ?>
+<?php require_any_login(); ?>
+
+<?php
 $page_title = "add customer" ;
 require_once(SHARED_PATH .'/header.php');
 
@@ -19,7 +22,7 @@ if (is_post_request()){
 //getting staff_id from stafftable
   $staff_id = return_staff_id($assign) ;
   insert_customers($fullname, $email, $phone, $address, $date, $status, $source, $staff_id, $comment);
-  
+  redirect_to_dashboard();
   
 }
 
@@ -30,7 +33,7 @@ if (is_post_request()){
 	<h3>Customer Form</h3>
 </div>
 <div class ="bread-crumb">
-<a class="back_link" href="<?php echo url_for('public/admin/index.php'); ?>"> &laquo; Back to Admin</a> 
+<a class="back_link" href="<?php echo return_dashboard(); ?>"> &laquo; Back to Admin</a> 
 </div>
 <div class="form_container">
   <form action="<?php echo url_for('public/admin/add_customer.php')?>" method = "post">
@@ -52,9 +55,9 @@ if (is_post_request()){
 
     <label for="status">Status</label>
     <select id="status" name="status">
-    	<option>None</option>
-		<option value = "1">In Process</option>
-    <option value = "0">completed</option>
+    	<option value = "2">In Process</option>
+		<option value = "1">Quoted</option>
+    <option value = "0">Ordered</option>
     </select>
 
 
