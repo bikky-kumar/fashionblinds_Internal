@@ -46,11 +46,12 @@ if (is_post_request()){
 				</ul>
 			</nav>
 		</div>
+		</div>
 		<div class = "admin_features_view">
 			<?php require(PUBLIC_PATH. '/admin/search_widget.php') ?>
 			<?php require(PUBLIC_PATH. '/staff/staff_widget.php') ?>
 		</div>
-	</div>
+	
 	<div>
 		<h2>Assigned Customer</h2>
 		<?php require(PUBLIC_PATH .'/staff/customerlist_staff_view.php');?>

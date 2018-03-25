@@ -86,11 +86,13 @@ require_once(SHARED_PATH .'/header.php');
 			    			<input class="form-control" placeholder="Password" name="password" type="password" value="">
 			    		</div>
 			    		<div class= "user_role" name = "user_role">
-    						<select id="user_role" name="user_role">
-    							<option>None</option>
+   							<div class="styled-select slate">
+  								<select id="user_role" name="user_role">
+   								 <option>None</option>
 								<option>Admin</option>
     							<option>Staff</option>
-   							</select>
+ 							 	</select>
+							</div>
 			    	    </div>
 			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
 			    	</fieldset>
