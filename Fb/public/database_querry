@@ -101,6 +101,22 @@ INSERT INTO product_subtype(product_id, product_subtype) VALUES('4', 'Aria');
 
 ______________________________________________
 
+CREATE TABLE price_table(
+matrix_id int NOT NULL AUTO_INCREMENT,
+width varchar(20) NOT NULL,  
+height varchar(20) NOT NULL,
+price varchar(20) NOT NULL,
+PRIMARY KEY (matrix_id));
+
+ALTER TABLE price_table
+ADD unit varchar(10);
+
+ALTER TABLE price_table
+ADD product_id int, 
+product_type_id int;
+
+______________________________________________
+
 
 
 

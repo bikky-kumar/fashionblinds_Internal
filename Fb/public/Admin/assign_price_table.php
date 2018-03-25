@@ -5,70 +5,50 @@
 <?php require_once(SHARED_PATH .'/header.php');
 ?>
 
-
 <?php
 
 if (isset($_POST['submit'])){
 
-	//the path to store the uploaded csv file
-	//$target = "pricefiles/".basename($_FILES[''][''])
+  $errors = [];	
+  $product_info = [];	
+  $product_info['product_id'] = isset($_POST['product_type']) ? $_POST['product_type'] : ''; 
+  $product_info['product_subtype'] = isset($_POST['product_subtype']) ? $_POST['product_subtype'] : '';
+  $product_info['measurement_drop'] = isset($_POST['measurement_drop']) ? $_POST['measurement_drop'] : '';
 
-	//this will go and get the input type names csv_file
-	$file = $_FILES['csv_file'];
-
-	//php gets all this information about the file in array
-	$fileName = $file['name'];
-	$fileTmpLoc = $file['tmp_name'];
-	$fileSize = $file['size'];
-	$fileError = $file['error'];
-	$fileType = $file['type'];
-
-	//get the extension of te file by sepearating the file by explode function by . symbol
-
-	$fileExt = explode('.', $fileName);
-	$fileActualExt = strtolower(end($fileExt));
-
-	//array of files to be allowed
-	$allowedFiles = array('csv', 'php');
-
-	// in array function checks if the value  exists in the given array, 1st param is the value and second is the array in which it will check
-	if (in_array($fileActualExt, $allowedFiles)){
-		if($fileError === 0){
-				if($fileSize < 100000){
-					//here we can change the file name with rNDOM STRINGS BUT I want to overwrite the file
-					$fileDestination = 'pricefiles/'.$fileName;
-					//first parameter is the temproray location and second parameter is the destination in the directory
-					move_uploaded_file($fileTmpLoc, $fileDestination);
-					echo "File succesfully uploaded";
-				}
-				else{
-					echo "file to large";
-				}
-		}
-		else{
-			echo "there was error with the file";
-		}	
+  //check if any feild is blank
+	if(empty($product_info['product_id'])){
+		$errors[] = "Product cannot be blank";
 	}
-	else{
-		echo "cannot upload the filetype";
+	if(empty($product_info['product_subtype'])){
+		$errors[] = "Product type cannot be blank";
+	}
+	if(empty($product_info['measurement_drop'])){
+		$errors[] = "Product size cannot be blank";
+	}
+
+
+	if(empty($errors)){
+	    $product_info['product_type_id'] = find_product_type($product_info['product_subtype']);
+		
+		csv_file_read('csv_file', $product_info);
 	}
 }
 
-
 ?>
+
 
 <div class ="bread-crumb">
 <a class="back_link" href="<?php echo return_dashboard(); ?>"> &laquo; Back to Admin</a> 
 </div>
 
-<br />
-<br />
+<?php echo display_errors($errors); ?>
 <div id = "price_table_uploads">
     <form method = "POST"  action = "assign_price_table.php" enctype="multipart/form-data">
+
 	    <table border = "1" class= "list">
 	        <tr>
-	            <th>Type</th>
-	            <th>Subtype</th>
+	            <th>Product</th>
+	            <th>Product type</th>
 	            <th>Width Type</th>
 	            <th>upload</th>
 	            <th>Action</th>
@@ -102,7 +82,16 @@ if (isset($_POST['submit'])){
 	        </tr>           
 	    </table>
 	</form>
+	</div>
 </div>
+
+
+
+
+
+
+
+<?php require_once(SHARED_PATH ."/footer.php");?>
 
 
 <script>

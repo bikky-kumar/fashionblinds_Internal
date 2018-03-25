@@ -317,6 +317,46 @@ function product_type_list(){
     return $product_result;
 }
 
+function find_product_type($product_subtype){
+    global $db;
+    $sql = "SELECT product_subtype_id FROM product_subtype ";
+    $sql .= "WHERE product_subtype = '". db_escape($db, $product_subtype). "'";
+    $product_result = mysqli_query($db, $sql);
+    confirm_result_set($product_result);
+    $value = mysqli_fetch_assoc($product_result);
+    return $value['product_subtype_id'];
+}
+
+function insert_price_table($width, $height, $price , $product_info){
+  global $db;
+  for($i = 0; $i < sizeof($width); $i++){
+  
+  $sql = "INSERT INTO price_table";
+  $sql .= "(width, height, price, unit, product_id, product_type_id) "; 
+  $sql .= " VALUES (";
+  $sql .= "'" . db_escape($db, $width[$i]). "',";
+  $sql .= "'" . db_escape($db, $height[$i]). "',";
+  $sql .= "'" . db_escape($db, $price[$i]). "',";
+  $sql .= "'" . db_escape($db, $product_info['measurement_drop']). "',";
+  $sql .= "'" . db_escape($db, $product_info['product_id']). "',";
+  $sql .= "'" . db_escape($db, $product_info['product_type_id']). "'";
+  $sql .= ")";  
+
+  $result = mysqli_query($db, $sql);
+
+  }
+  
+  //if true
+  if($result){
+    //redirect_to_dashboard();
+  }else{
+    error_msg();
+  }
+  
+  
+}
+
+
 
 
 ?>

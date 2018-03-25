@@ -25,15 +25,12 @@
 </html>
 
 <script>
-
-
-
-
 $(document).ready(function(){
+
  $('#load_data').change(function(){
   
   $.ajax({
-   url:"EXCEL-WOODVENETAIN-BUDGET-50MM.csv",
+   url:"EXCEL-WOODVENETAIN-BUDGET-35MM.csv",
    dataType:"text",
    success:function(data)
    {
