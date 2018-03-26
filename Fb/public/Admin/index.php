@@ -26,19 +26,24 @@
 
 
 
-
-	<div>	
-		<div class = "admin_features_view">
-			<?php require(PUBLIC_PATH. '/admin/search_widget.php') ?>
+<div>	
+	<div class = "admin_features_view">
+		<div>
 			<?php require(PUBLIC_PATH. '/admin/admin_widget.php') ?>
 		</div>
-	<div>
-		<h2> List of Customers </h2>
-		<?php require(PUBLIC_PATH .'/customers/customerlist.php');?>
+		<div>
+		<?php require(PUBLIC_PATH. '/admin/search_widget.php') ?>
+		</div>
 	</div>
-	<div>
-		<h2>List of staff</h2>
-		<?php require(PUBLIC_PATH. '/staff/stafflist.php') ?>
+	<div>	
+		<div>
+			<h2> List of Customers </h2>
+			<?php require(PUBLIC_PATH .'/customers/customerlist.php');?>
+		</div>
+		<div>
+			<h2>List of staff</h2>
+			<?php require(PUBLIC_PATH. '/staff/stafflist.php') ?>
+		</div>
 	</div>
 </div>
 </div>

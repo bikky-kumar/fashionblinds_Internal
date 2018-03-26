@@ -18,11 +18,11 @@ $total_customer = count_customer();
 			<td><span id = "new_calls">: 3</span></td>
 		</tr>
 		<tr>  
-			<td><span id = "widget_name">revenue from Facebook </span></td>
+			<td><span id = "widget_name">Calls from Facebook </span></td>
 			<td><span id = "new_calls"><?php echo ": ". "$2300"; ?></span></td>
 		</tr>
 		<tr>  
-			<td><span id = "widget_name">revenue from Google </span></td>
+			<td><span id = "widget_name">Calls from Google </span></td>
 			<td><span id = "new_calls"><?php echo ": ". " $1700"; ?></span></td>
 		</tr>
 </table>

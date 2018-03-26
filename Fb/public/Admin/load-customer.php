@@ -1,51 +1,17 @@
 <?php require_once("../../private/initialize.php"); ?>
-<?php require_any_login(); ?>
 
 
 
 <?php
 
-$query_id = isset($_GET['query_id']) ? $_GET['query_id'] : ''; 
+$query_id = isset($_POST['query_id']) ? $_POST['query_id'] : ''; 
+
+
+
+//$db is connection and $sql is query
 $customer_set = find_all_customers();
-
-if(!admin_logged_in()){
-
-    $Staff_id = $_SESSION['staff_id'];
-  
-    if(($query_id  == '1')||($query_id  == '2')||($query_id  == '4')||($query_id  == '12')){
-        $customer_set = change_interval($query_id, $Staff_id) ;      
-    }
-
-    if($query_id == 'Default'){
-        $customer_set = find_customers($Staff_id);         
-	}
-	if(($query_id  == '20')||($query_id  == '21')||($query_id  == '22')){
-        $customer_set = change_by_Status($query_id, $Staff_id);      
-    }
-
-
-}
-else{
-    
-    if(($query_id == '1')||($query_id == '2')||($query_id == '4')||($query_id == '12')){
-        $customer_set = list_interval_for_admin($query_id) ;      
-    }
-    
-    if($query_id == 'Default'){
-        $customer_set = find_all_customers();        
-    }
-    if(($query_id == '20')||($query_id == '21')||($query_id == '22')){
-       $customer_set = list_Status_for_admin($query_id)  ;   
-    }
-}
-
-
-
-
 ?>
-
-<div id = "cusotmer-list">
-<table class = "list">
+<table class = "list" id = "cusotmer-list">
 <tr>
 <th>ID</th>
 <th>full Name</th>
@@ -87,13 +53,3 @@ $status = find_status($customer['status']);
 </tr>
 <?php } ?>
 </table>
-</div>
-
-
-
-
-
-
-
-
-

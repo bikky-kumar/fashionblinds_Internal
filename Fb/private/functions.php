@@ -42,7 +42,7 @@ function current_date(){
 
 function welcome(){
     if(isset($_SESSION['username'])){
-        echo "Welcome: ". $_SESSION['username'];
+        echo " ". $_SESSION['username'];
     }
     else{
      // redirect_to('../login.php');

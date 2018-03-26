@@ -4,35 +4,6 @@
 <?php require_once(SHARED_PATH .'/header.php');
 ?>
 
-<?php $customer_set = find_customers($_SESSION['staff_id']); ?>
-
-<?php
-
-if (is_post_request()){
-
-	$Staff_id = $_SESSION['staff_id'];
-  
-  
-	$query = isset($_POST['show_list_by']) ? $_POST['show_list_by'] : 'Default'; 
-    if(($query == '1')||($query == '2')||($query == '4')||($query == '12')){
-        $customer_set = change_interval($query, $Staff_id) ;      
-    }
-
-    if($query == 'Default'){
-        $customer_set = find_customers($Staff_id);         
-	}
-	if(($query == '20')||($query == '21')||($query == '22')){
-        $customer_set = change_by_Status($query, $Staff_id);      
-    }
-    
-	}
-	//if not a post request
-    else{
-    
-      //redirect_to(url_for('/public/admin/index.php'));
-    }
-?>
-
 <div class="container">
 	<div class = "page-heading">
 		<h3>Staff dashboard </h3>
@@ -54,7 +25,7 @@ if (is_post_request()){
 	
 	<div>
 		<h2>Assigned Customer</h2>
-		<?php require(PUBLIC_PATH .'/staff/customerlist_staff_view.php');?>
+		<?php require(PUBLIC_PATH .'/customers/customerlist.php');?>
 	</div>
 	<div>
 		<h2>Account info</h2>

@@ -106,7 +106,7 @@ function find_all_customers(){
     //make sure when concatenation $sql .= / there is a space at the end of select statement
     global $db;
     $sql = "SELECT * FROM customers ";
-    $sql .= "ORDER BY contact_date DESC limit 20";
+    $sql .= "ORDER BY contact_date DESC limit 10";
     $customer_result = mysqli_query($db, $sql);
     confirm_result_set($customer_result);
     return $customer_result;
@@ -354,6 +354,29 @@ function insert_price_table($width, $height, $price , $product_info){
   }
   
   
+}
+
+
+function list_interval_for_admin($query){
+    global $db;
+
+    $sql = "SELECT * FROM customers ";
+    $sql .= "WHERE contact_date >= DATE(NOW()) - INTERVAL $query WEEK";
+    $customer_result = mysqli_query($db, $sql);
+    confirm_result_set($customer_result);
+    return $customer_result;
+    
+}
+
+function list_Status_for_admin($query){
+    global $db;
+    $status = $query-20;
+    $sql = "SELECT * FROM customers ";
+    $sql .= "WHERE  status = '". db_escape($db, $status). "'";
+    $customer_result = mysqli_query($db, $sql);
+    confirm_result_set($customer_result);
+    return $customer_result;
+    
 }
 
 
